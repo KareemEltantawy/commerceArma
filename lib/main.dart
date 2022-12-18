@@ -67,7 +67,7 @@ class MyApp extends StatelessWidget {
             create: (BuildContext context) => AppCubit()..changeAppMode(isDarkFromShared: isDark)..changeLanguage(languageFromShared: languageFromShared)
         ),
         BlocProvider(
-            create: (BuildContext context) => EcommerceCubit()..getHome()..getFavorites()..getCategories()..getAccount()
+            create: (BuildContext context) => EcommerceCubit()..getHome()..getFavorites()..getCategories()..getAccount()..getCarts()
         ),
 
       ],

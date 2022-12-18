@@ -3,6 +3,7 @@ import 'package:ecomerce_app/shared/components/components.dart';
 import 'package:ecomerce_app/shared/network/local/cache_helper.dart';
 import 'package:ecomerce_app/shared/styles/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnboardingModel {
   final String image;
@@ -34,11 +35,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       title: 'Get It Deliverd ',
     ),
   ];
+  var onBoardingController = PageController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageView.builder(
+        controller: onBoardingController,
         itemBuilder: (context, index) => buildItem(onboarding[index]),
         itemCount: onboarding.length,
       ),
@@ -61,10 +64,20 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               children: [
                 Text(
                   model.title,
-                  style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 27.0, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
-                  height: 20.0,
+                  height: 15.0,
+                ),
+                SmoothPageIndicator(controller: onBoardingController, count: onboarding.length,effect: ExpandingDotsEffect(
+                  dotWidth: 10,
+                  dotHeight: 10,
+                  dotColor: Colors.grey,
+                  activeDotColor: defaultColor,
+                  spacing: 5,
+                ),),
+                SizedBox(
+                  height: 15.0,
                 ),
                 Container(
                   width: double.infinity,

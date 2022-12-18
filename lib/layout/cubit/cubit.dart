@@ -1,13 +1,16 @@
 import 'package:ecomerce_app/models/account_model.dart';
+import 'package:ecomerce_app/models/cart_model.dart';
 import 'package:ecomerce_app/models/categories_model.dart';
 import 'package:ecomerce_app/models/category_products_model.dart';
 import 'package:ecomerce_app/models/chane_favorites_model.dart';
+import 'package:ecomerce_app/models/change_cart_model.dart';
 import 'package:ecomerce_app/models/favorites_model.dart';
 import 'package:ecomerce_app/models/home_model.dart';
 import 'package:ecomerce_app/models/product_details_model.dart';
 import 'package:ecomerce_app/models/search_model.dart';
 import 'package:ecomerce_app/models/update_account_model.dart';
 import 'package:ecomerce_app/modules/account/account_screen.dart';
+import 'package:ecomerce_app/modules/cart/cart_screen.dart';
 import 'package:ecomerce_app/modules/trends/trends_screen.dart';
 import 'package:ecomerce_app/shared/components/constants.dart';
 import 'package:ecomerce_app/shared/network/end_points.dart';
@@ -29,6 +32,7 @@ class EcommerceCubit extends Cubit<EcommerceStates> {
     HomeScreen(),
     TrendsScreen(),
     FavoritesScreen(),
+    CartScreen(),
     AccountScreen(),
   ];
 
@@ -51,12 +55,14 @@ class EcommerceCubit extends Cubit<EcommerceStates> {
 
   HomeModel? homeModel;
   Map<int, bool> favorites = {};
+  Map<int,bool> carts = {};
 
   void getHome() {
     DioHelper.getData(url: HOME, token: token).then((value) {
       homeModel = HomeModel.fromJson(value.data);
       homeModel!.data!.products!.forEach((element) {
         favorites.addAll({element.id!: element.inFavorites!});
+        carts.addAll({element.id!:element.inCart!});
       });
       emit(EcommerceCategoriesSuccessState());
     }).catchError((error) {
@@ -111,6 +117,9 @@ class EcommerceCubit extends Cubit<EcommerceStates> {
         if (!favorites.containsKey(element.id!)) {
           favorites.addAll({element.id!: element.inFavorites!});
         }
+        if(!carts.containsKey(element.id)){
+          carts.addAll({element.id!:element.inCart!});
+        }
       });
       emit(EcommerceCategoryProductsErrorState());
     }).catchError((error) {
@@ -132,6 +141,9 @@ class EcommerceCubit extends Cubit<EcommerceStates> {
       searchModel!.data!.data!.forEach((element) {
         if (!favorites.containsKey(element.id!)) {
           favorites.addAll({element.id!: element.inFavorites!});
+        }
+        if(!carts.containsKey(element.id)){
+          carts.addAll({element.id!:element.inCart!});
         }
       });
       emit(EcommerceSearchSuccessState());
@@ -191,4 +203,35 @@ class EcommerceCubit extends Cubit<EcommerceStates> {
       emit(EcommerceUpdateAccountErrorState());
     });
   }
+ CartModel? cartModel;
+  void getCarts(){
+    DioHelper.getData(url: CARTS,token: token).then((value){
+      cartModel = CartModel.fromJson(value.data);
+      emit(EcommerceGetCartsSuccessState());
+    }).catchError((error){
+      print(error.toString());
+      emit(EcommerceGetCartsErrorState());
+    });
+  }
+  
+  ChangeCartModel? changeCartModel;
+  void changeCart(int productId){
+    carts[productId] = !carts[productId]!;
+    emit(EcommerceChangeCartsState());
+    DioHelper.postData(url: CARTS, data: {'product_id': productId},token: token).then((value){
+      changeCartModel = ChangeCartModel.fromJson(value.data);
+      if(!changeCartModel!.status!){
+        carts[productId] = !carts[productId]!;
+      }else{
+        getCarts();
+      }
+      emit(EcommerceChangeCartsSuccessState());
+    }).catchError((error){
+      print(error.toString());
+      carts[productId] = !carts[productId]!;
+      emit(EcommerceChangeCartsErrorState());
+    });
+  }
+
+
 }

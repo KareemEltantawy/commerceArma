@@ -106,6 +106,20 @@ class SearchScreen extends StatelessWidget {
                     Spacer(),
                     IconButton(
                         onPressed: () {
+                          EcommerceCubit.get(context)
+                              .changeCart(model.id);
+                        },
+                        icon: CircleAvatar(
+                          radius: 22.0,
+                          backgroundColor: EcommerceCubit.get(context).carts[model.id]! ? defaultColor : Colors.grey,
+                          child: Icon(
+                            Icons.add_shopping_cart_outlined,
+                            size: 16,
+                            color: Colors.white,
+                          ),
+                        )),
+                    IconButton(
+                        onPressed: () {
                           EcommerceCubit.get(context).changeFavorites(model.id);
                         },
                         icon: CircleAvatar(

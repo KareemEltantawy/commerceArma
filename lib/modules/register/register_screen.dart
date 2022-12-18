@@ -33,6 +33,7 @@ class RegisterScreen extends StatelessWidget {
                 EcommerceCubit.get(context).getCategories();
                 EcommerceCubit.get(context).getFavorites();
                 EcommerceCubit.get(context).getAccount();
+                EcommerceCubit.get(context).getCarts();
                 navigateAndFinish(context, Layout());
               });
             } else {

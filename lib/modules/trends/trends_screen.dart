@@ -49,16 +49,30 @@ class TrendsScreen extends StatelessWidget {
                   if (model.discount != 0)
                     Container(
                       color: Colors.red,
-                      padding: EdgeInsets.symmetric(horizontal: 10.0),
+                      padding: EdgeInsets.symmetric(horizontal: 2.0),
                       child: Text(
                         'Discount',
                         style: TextStyle(
-                          fontSize: 14.0,
+                          fontSize: 12.0,
                           color: Colors.white,
                         ),
                       ),
                     ),
                   Spacer(),
+                  IconButton(
+                      onPressed: () {
+                        EcommerceCubit.get(context)
+                            .changeCart(model.id);
+                      },
+                      icon: CircleAvatar(
+                        radius: 22.0,
+                        backgroundColor: EcommerceCubit.get(context).carts[model.id]! ? defaultColor : Colors.grey,
+                        child: Icon(
+                          Icons.add_shopping_cart_outlined,
+                          size: 16,
+                          color: Colors.white,
+                        ),
+                      )),
                   IconButton(
                       onPressed: () {
                         EcommerceCubit.get(context).changeFavorites(model.id);
@@ -105,7 +119,7 @@ class TrendsScreen extends StatelessWidget {
                     children: [
                       Container(
                           color: Colors.grey,
-                          padding: EdgeInsets.symmetric(horizontal: 10.0),
+                          padding: EdgeInsets.symmetric(horizontal: 4.0),
                           child: Text('${(((model.oldPrice-model.price) / model.oldPrice)*100).round()}%',
                             style: TextStyle(
                               color: defaultColor,
