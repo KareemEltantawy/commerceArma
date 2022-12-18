@@ -44,4 +44,15 @@ class EcommerceUpdateAccountSuccessState extends EcommerceStates{}
 
 class EcommerceUpdateAccountErrorState extends EcommerceStates{}
 
+class EcommerceGetCartsSuccessState extends EcommerceStates{}
+
+class EcommerceGetCartsErrorState extends EcommerceStates{}
+
+class EcommerceChangeCartsSuccessState extends EcommerceStates{}
+
+class EcommerceChangeCartsErrorState extends EcommerceStates{}
+
+class EcommerceChangeCartsState extends EcommerceStates{}
+
+
 

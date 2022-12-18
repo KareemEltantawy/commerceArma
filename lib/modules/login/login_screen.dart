@@ -32,6 +32,7 @@ class LoginScreen extends StatelessWidget {
                 EcommerceCubit.get(context).getCategories();
                 EcommerceCubit.get(context).getFavorites();
                 EcommerceCubit.get(context).getAccount();
+                EcommerceCubit.get(context).getCarts();
                 navigateAndFinish(context, Layout());
               });
             } else {
@@ -61,10 +62,7 @@ class LoginScreen extends StatelessWidget {
                         ),
                         Text(
                           lang == 'ar' ? 'قم بتسجيل الدخول للاستكمال' :'Please log In To Continue',
-                          style: TextStyle(
-                            fontSize: 16.0,
-                            color: Colors.grey,
-                          ),
+                          style: Theme.of(context).textTheme.bodyText2,
                         ),
                         SizedBox(
                           height: 50.0,

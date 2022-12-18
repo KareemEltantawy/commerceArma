@@ -3,31 +3,30 @@ import 'package:ecomerce_app/layout/cubit/states.dart';
 import 'package:ecomerce_app/modules/product_details/product_details_screen.dart';
 import 'package:ecomerce_app/shared/components/components.dart';
 import 'package:ecomerce_app/shared/styles/colors.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CategoryProductsScreen extends StatelessWidget {
+class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<EcommerceCubit, EcommerceStates>(
         listener: (context, state) {},
         builder: (context, state) {
-          return Scaffold(
-            appBar: AppBar(),
-            body: EcommerceCubit.get(context).categoryProductsModel != null ? GridView.count(
-              crossAxisCount: 2,
-              crossAxisSpacing: 1.0,
-              mainAxisSpacing: 1.0,
-              childAspectRatio: MediaQuery.of(context).size.width / 680,
-              children: List.generate(EcommerceCubit.get(context).categoryProductsModel!.data!.data!.length,
-                      (index) => buildItem(EcommerceCubit.get(context).categoryProductsModel!.data!.data![index], context)),
-            ) : Center(child: CircularProgressIndicator()),
-          );
+          return EcommerceCubit.get(context).cartModel != null
+              ? ListView.separated(
+              itemBuilder: (context, index) => buildItem(
+                  EcommerceCubit.get(context).cartModel!.data!.cartItems![index].product,
+                  context),
+              separatorBuilder: (context, index) => SizedBox(
+                height: 10.0,
+              ),
+              itemCount: EcommerceCubit.get(context).cartModel!.data!.cartItems!.length)
+              : Center(child: CircularProgressIndicator());
         });
   }
-
   Widget buildItem(model, context) => InkWell(
-    onTap: (){
+    onTap: () {
       EcommerceCubit.get(context).getProductDetails(model.id);
       navigateTo(context, ProductDetailsScreen());
     },
@@ -50,11 +49,11 @@ class CategoryProductsScreen extends StatelessWidget {
                   if (model.discount != 0)
                     Container(
                       color: Colors.red,
-                      padding: EdgeInsets.symmetric(horizontal: 2.0),
+                      padding: EdgeInsets.symmetric(horizontal: 10.0),
                       child: Text(
                         'Discount',
                         style: TextStyle(
-                          fontSize: 12.0,
+                          fontSize: 16.0,
                           color: Colors.white,
                         ),
                       ),
@@ -67,29 +66,13 @@ class CategoryProductsScreen extends StatelessWidget {
                       },
                       icon: CircleAvatar(
                         radius: 22.0,
-                        backgroundColor: EcommerceCubit.get(context).carts[model.id]! ? defaultColor : Colors.grey,
+                        backgroundColor: defaultColor,
                         child: Icon(
                           Icons.add_shopping_cart_outlined,
                           size: 16,
                           color: Colors.white,
                         ),
                       )),
-                  IconButton(
-                      onPressed: () {
-                        EcommerceCubit.get(context).changeFavorites(model.id);
-                      },
-                      icon: CircleAvatar(
-                        radius: 22.0,
-                        backgroundColor:
-                        EcommerceCubit.get(context).favorites[model.id]!
-                            ? defaultColor
-                            : Colors.grey,
-                        child: Icon(
-                          Icons.favorite_outline,
-                          size: 16,
-                          color: Colors.white,
-                        ),
-                      ))
                 ],
               )
             ],
@@ -115,19 +98,21 @@ class CategoryProductsScreen extends StatelessWidget {
                 SizedBox(
                   height: 10.0,
                 ),
-                if(model.discount!=0)
+                if (model.discount != 0)
                   Row(
                     children: [
                       Container(
                           color: Colors.grey,
-                          padding: EdgeInsets.symmetric(horizontal: 4.0),
-                          child: Text('${(((model.oldPrice-model.price) / model.oldPrice)*100).round()}%',
+                          padding: EdgeInsets.symmetric(horizontal: 10.0),
+                          child: Text(
+                            '${(((model.oldPrice - model.price) / model.oldPrice) * 100).round()}%',
                             style: TextStyle(
                               color: defaultColor,
                             ),
                           )),
                       Spacer(),
-                      Text('EGP ${model.oldPrice.round()}',
+                      Text(
+                        'EGP ${model.oldPrice}',
                         style: TextStyle(
                             fontSize: 14.0,
                             color: Colors.grey,
@@ -142,6 +127,4 @@ class CategoryProductsScreen extends StatelessWidget {
       ),
     ),
   );
-
-
 }

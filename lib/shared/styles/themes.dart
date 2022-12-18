@@ -26,7 +26,7 @@ ThemeData lightTheme = ThemeData(
 primarySwatch: defaultColor,
 textTheme: TextTheme(
   bodyText1: TextStyle(
-    fontSize: 24.0,
+    fontSize: 22.0,
     fontWeight: FontWeight.bold,
     color: Colors.black,
   ),
@@ -72,7 +72,7 @@ ThemeData darkTheme = ThemeData(
   primarySwatch: defaultColor,
   textTheme: TextTheme(
       bodyText1: TextStyle(
-        fontSize: 24.0,
+        fontSize: 22.0,
         fontWeight: FontWeight.bold,
         color: Colors.white,
       ),

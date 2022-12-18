@@ -15,3 +15,5 @@ const SEARCH = 'products/search';
 const PROFILE = 'profile';
 
 const UPDATE_PROFILE = 'update-profile';
+
+const CARTS = 'carts';

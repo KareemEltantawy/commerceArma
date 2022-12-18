@@ -57,7 +57,7 @@ class Layout extends StatelessWidget {
                 icon: Icon(
                   Icons.home,
                 ),
-                label: lang == 'ar' ? 'الصفحه الرئيسيه' :'Home',
+                label: lang == 'ar' ? 'الرئيسيه' :'Home',
               ),
               BottomNavigationBarItem(
                 icon: Icon(
@@ -70,6 +70,12 @@ class Layout extends StatelessWidget {
                   Icons.favorite,
                 ),
                 label: lang == 'ar' ? 'المفضله' :'Favorites',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.add_shopping_cart_outlined,
+                ),
+                label: lang == 'ar' ? 'العربه' :'Cart',
               ),
               BottomNavigationBarItem(
                 icon: Icon(

@@ -42,11 +42,7 @@ class ProductDetailsScreen extends StatelessWidget {
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
-                                if (EcommerceCubit.get(context)
-                                        .productDetailsModel!
-                                        .data!
-                                        .discount !=
-                                    0)
+                                if (EcommerceCubit.get(context).productDetailsModel!.data!.discount != 0)
                                   Container(
                                     color: Colors.red,
                                     padding:
@@ -60,6 +56,20 @@ class ProductDetailsScreen extends StatelessWidget {
                                     ),
                                   ),
                                 Spacer(),
+                                IconButton(
+                                    onPressed: () {
+                                      EcommerceCubit.get(context)
+                                          .changeCart(EcommerceCubit.get(context).productDetailsModel!.data!.id!);
+                                    },
+                                    icon: CircleAvatar(
+                                      radius: 22.0,
+                                      backgroundColor: EcommerceCubit.get(context).carts[EcommerceCubit.get(context).productDetailsModel!.data!.id]! ? defaultColor : Colors.grey,
+                                      child: Icon(
+                                        Icons.add_shopping_cart_outlined,
+                                        size: 16,
+                                        color: Colors.white,
+                                      ),
+                                    )),
                                 IconButton(
                                     onPressed: () {
                                       EcommerceCubit.get(context)
