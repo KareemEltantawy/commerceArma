@@ -14,22 +14,31 @@ class FavoritesScreen extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         return EcommerceCubit.get(context).favoritesModel != null
-            ? ListView.separated(
-                itemBuilder: (context, index) => buildItem(
-                    EcommerceCubit.get(context)
+            ? EcommerceCubit.get(context).favoritesModel!.data!.data!.length > 0
+                ? ListView.separated(
+                    itemBuilder: (context, index) => buildItem(
+                        EcommerceCubit.get(context)
+                            .favoritesModel!
+                            .data!
+                            .data![index]
+                            .product!,
+                        context),
+                    separatorBuilder: (context, index) => SizedBox(
+                          height: 10.0,
+                        ),
+                    itemCount: EcommerceCubit.get(context)
                         .favoritesModel!
                         .data!
-                        .data![index]
-                        .product!,
-                    context),
-                separatorBuilder: (context, index) => SizedBox(
-                      height: 10.0,
+                        .data!
+                        .length)
+                : Center(
+                    child: Text(
+                    'There Is No Items',
+                    style: TextStyle(
+                      fontSize: 14.0,
+                      color: Colors.grey,
                     ),
-                itemCount: EcommerceCubit.get(context)
-                    .favoritesModel!
-                    .data!
-                    .data!
-                    .length)
+                  ))
             : Center(child: CircularProgressIndicator());
       },
     );

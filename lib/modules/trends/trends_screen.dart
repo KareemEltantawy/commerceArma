@@ -14,6 +14,7 @@ class TrendsScreen extends StatelessWidget {
         builder: (context, state) {
           return EcommerceCubit.get(context).homeModel != null
               ? GridView.count(
+            reverse: true,
             crossAxisCount: 2,
             crossAxisSpacing: 1.0,
             mainAxisSpacing: 1.0,

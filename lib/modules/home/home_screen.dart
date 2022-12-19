@@ -82,6 +82,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                     ListView.separated(
+                      reverse: true,
                         physics: NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         itemBuilder: (context, index) => buildProductItem(
