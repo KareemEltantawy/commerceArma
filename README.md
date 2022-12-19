@@ -1,16 +1,10 @@
 # CommerceArma App
 
-A new Flutter application.
+CommerceArma is an e-commerce application that show products in some categories like
+Electronics, Men's Clothes and Women's Clothes and sports equipments, user can add product to
+his favorites or add it to his cart in an easy way.
 
-## Getting Started
+## Application Features
 
-This project is a starting point for a Flutter application.
+- simple interface and easy to use.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
