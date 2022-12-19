@@ -2,7 +2,7 @@
 
 CommerceArma is an e-commerce application that show products in some categories like
 Electronics, Men's Clothes and Women's Clothes and sports equipments, user can add product to
-his favorites or add it to his cart in an easy way.
+his favorites or add it to his cart in an easy way, find what you need, fast By searching for the product by name.
 
 ## Application Features
 
