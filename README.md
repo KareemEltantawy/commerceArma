@@ -7,4 +7,11 @@ his favorites or add it to his cart in an easy way.
 ## Application Features
 
 - simple interface and easy to use.
+- Determine the category to which the product you want to buy belongs, so that you can reach it faster.
+- save your favorite products in the favorites list.
+- add the product that you want to buy in the cart.
+- you can edit your personal information in an easy way.
+- two theme dark and light.
+- support english and arabic languages.
+- no Ads
 
