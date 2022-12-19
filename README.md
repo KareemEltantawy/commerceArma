@@ -1,4 +1,4 @@
-# ecomerce_app
+# CommerceArma App
 
 A new Flutter application.
 
