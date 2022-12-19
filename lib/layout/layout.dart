@@ -37,10 +37,11 @@ class Layout extends StatelessWidget {
                 icon: Icon(Icons.language),
                 onPressed: () {
                   AppCubit.get(context).changeLanguage();
-                  EcommerceCubit.get(context).getHome();
-                  EcommerceCubit.get(context).getFavorites();
-                  EcommerceCubit.get(context).getCategories();
-                  EcommerceCubit.get(context).getAccount();
+                  cubit.getHome();
+                  cubit.getFavorites();
+                  cubit.getCategories();
+                  cubit.getAccount();
+                  cubit.getCarts();
                 },
               ),
 

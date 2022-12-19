@@ -14,14 +14,18 @@ class CartScreen extends StatelessWidget {
         listener: (context, state) {},
         builder: (context, state) {
           return EcommerceCubit.get(context).cartModel != null
-              ? ListView.separated(
+              ? EcommerceCubit.get(context).cartModel!.data!.cartItems!.length > 0 ? ListView.separated(
               itemBuilder: (context, index) => buildItem(
                   EcommerceCubit.get(context).cartModel!.data!.cartItems![index].product,
                   context),
               separatorBuilder: (context, index) => SizedBox(
                 height: 10.0,
               ),
-              itemCount: EcommerceCubit.get(context).cartModel!.data!.cartItems!.length)
+              itemCount: EcommerceCubit.get(context).cartModel!.data!.cartItems!.length) : Center(child: Text('There Is No Items',
+          style: TextStyle(
+            fontSize: 14.0,
+            color: Colors.grey,
+          ),))
               : Center(child: CircularProgressIndicator());
         });
   }
@@ -68,8 +72,8 @@ class CartScreen extends StatelessWidget {
                         radius: 22.0,
                         backgroundColor: defaultColor,
                         child: Icon(
-                          Icons.add_shopping_cart_outlined,
-                          size: 16,
+                          Icons.delete_outline,
+                          size: 19,
                           color: Colors.white,
                         ),
                       )),
