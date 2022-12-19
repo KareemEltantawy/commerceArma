@@ -17,3 +17,6 @@ his favorites or add it to his cart in an easy way, user can find what he need f
 - support english and arabic languages.
 - no Ads
 
+
+
+![2](https://user-images.githubusercontent.com/52360596/208500530-65710ca0-2a53-4926-9b3b-00279dc3a8aa.jpg)
