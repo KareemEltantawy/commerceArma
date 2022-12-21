@@ -15,56 +15,59 @@ class SearchScreen extends StatelessWidget {
     return BlocConsumer<EcommerceCubit, EcommerceStates>(
         listener: (context, state) {},
         builder: (context, state) {
-          return Scaffold(
-            appBar: AppBar(
-              automaticallyImplyLeading: false,
-              title: Row(
-                children: [
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextFormField(
-                        controller: searchController,
-                        keyboardType: TextInputType.text,
-                        onChanged: (value) {
-                          EcommerceCubit.get(context).search(value);
-                        },
-                        decoration: InputDecoration(
-                          hintText: lang == 'ar' ? 'عن ماذا تبحث ؟' :'What are you looking for ?',
-                          prefixIcon: Icon(Icons.search),
+          return Directionality(
+            textDirection: lang == 'ar' ? TextDirection.rtl : TextDirection.ltr,
+            child: Scaffold(
+              appBar: AppBar(
+                automaticallyImplyLeading: false,
+                title: Row(
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextFormField(
+                          controller: searchController,
+                          keyboardType: TextInputType.text,
+                          onChanged: (value) {
+                            EcommerceCubit.get(context).search(value);
+                          },
+                          decoration: InputDecoration(
+                            hintText: lang == 'ar' ? 'عن ماذا تبحث ؟' :'What are you looking for ?',
+                            prefixIcon: Icon(Icons.search),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  TextButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: Text(lang == 'ar' ? 'اغلاق':'Cancel',
-                        style: TextStyle(
-                          color: defaultColor,
-                        ),
-                      ))
-                ],
+                    TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: Text(lang == 'ar' ? 'اغلاق':'Cancel',
+                          style: TextStyle(
+                            color: defaultColor,
+                          ),
+                        ))
+                  ],
+                ),
               ),
+              body: EcommerceCubit.get(context).searchModel != null
+                  ? ListView.separated(
+                      itemBuilder: (context, index) => buildItem(
+                          EcommerceCubit.get(context)
+                              .searchModel!
+                              .data!
+                              .data![index],
+                          context),
+                      separatorBuilder: (context, index) => SizedBox(
+                            height: 10.0,
+                          ),
+                      itemCount: EcommerceCubit.get(context)
+                          .searchModel!
+                          .data!
+                          .data!
+                          .length)
+                  : Container(),
             ),
-            body: EcommerceCubit.get(context).searchModel != null
-                ? ListView.separated(
-                    itemBuilder: (context, index) => buildItem(
-                        EcommerceCubit.get(context)
-                            .searchModel!
-                            .data!
-                            .data![index],
-                        context),
-                    separatorBuilder: (context, index) => SizedBox(
-                          height: 10.0,
-                        ),
-                    itemCount: EcommerceCubit.get(context)
-                        .searchModel!
-                        .data!
-                        .data!
-                        .length)
-                : Container(),
           );
         });
   }
