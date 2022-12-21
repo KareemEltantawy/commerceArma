@@ -79,9 +79,7 @@ class MyApp extends StatelessWidget {
               darkTheme: darkTheme,
               themeMode: AppCubit.get(context).isDark ? ThemeMode.dark : ThemeMode.light,
               debugShowCheckedModeBanner: false,
-              home: Directionality(
-                  textDirection: lang == 'ar' ? TextDirection.rtl : TextDirection.ltr,
-                  child:startWidget),
+              home: startWidget,
             );
           }),
     );

@@ -2,6 +2,7 @@ import 'package:ecomerce_app/layout/cubit/cubit.dart';
 import 'package:ecomerce_app/layout/cubit/states.dart';
 import 'package:ecomerce_app/modules/product_details/product_details_screen.dart';
 import 'package:ecomerce_app/shared/components/components.dart';
+import 'package:ecomerce_app/shared/components/constants.dart';
 import 'package:ecomerce_app/shared/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,16 +13,19 @@ class CategoryProductsScreen extends StatelessWidget {
     return BlocConsumer<EcommerceCubit, EcommerceStates>(
         listener: (context, state) {},
         builder: (context, state) {
-          return Scaffold(
-            appBar: AppBar(),
-            body: EcommerceCubit.get(context).categoryProductsModel != null ? GridView.count(
-              crossAxisCount: 2,
-              crossAxisSpacing: 1.0,
-              mainAxisSpacing: 1.0,
-              childAspectRatio: MediaQuery.of(context).size.width / 680,
-              children: List.generate(EcommerceCubit.get(context).categoryProductsModel!.data!.data!.length,
-                      (index) => buildItem(EcommerceCubit.get(context).categoryProductsModel!.data!.data![index], context)),
-            ) : Center(child: CircularProgressIndicator()),
+          return Directionality(
+            textDirection: lang == 'ar' ? TextDirection.rtl : TextDirection.ltr,
+            child: Scaffold(
+              appBar: AppBar(),
+              body: EcommerceCubit.get(context).categoryProductsModel != null ? GridView.count(
+                crossAxisCount: 2,
+                crossAxisSpacing: 1.0,
+                mainAxisSpacing: 1.0,
+                childAspectRatio: MediaQuery.of(context).size.width / 680,
+                children: List.generate(EcommerceCubit.get(context).categoryProductsModel!.data!.data!.length,
+                        (index) => buildItem(EcommerceCubit.get(context).categoryProductsModel!.data!.data![index], context)),
+              ) : Center(child: CircularProgressIndicator()),
+            ),
           );
         });
   }

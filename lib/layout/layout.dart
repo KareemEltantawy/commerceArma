@@ -17,74 +17,77 @@ class Layout extends StatelessWidget {
 
         var cubit = EcommerceCubit.get(context);
 
-        return Scaffold(
-          appBar: AppBar(
-            title: Text(lang == 'ar' ? 'كمرس ارما' :'CommerceArma'),
-            actions: [
-              IconButton(
-                icon: Icon(Icons.search),
-                onPressed: () {
-                  navigateTo(context,SearchScreen());
-                },
-              ),
-              IconButton(
-                icon: Icon(Icons.brightness_4_outlined),
-                onPressed: () {
-                  AppCubit.get(context).changeAppMode();
+        return Directionality(
+          textDirection: lang == 'ar' ? TextDirection.rtl : TextDirection.ltr,
+          child: Scaffold(
+            appBar: AppBar(
+              title: Text(lang == 'ar' ? 'كمرس ارما' :'CommerceArma'),
+              actions: [
+                IconButton(
+                  icon: Icon(Icons.search),
+                  onPressed: () {
+                    navigateTo(context,SearchScreen());
                   },
-              ),
-              IconButton(
-                icon: Icon(Icons.language),
-                onPressed: () {
-                  AppCubit.get(context).changeLanguage();
-                  cubit.getHome();
-                  cubit.getFavorites();
-                  cubit.getCategories();
-                  cubit.getAccount();
-                  cubit.getCarts();
-                },
-              ),
+                ),
+                IconButton(
+                  icon: Icon(Icons.brightness_4_outlined),
+                  onPressed: () {
+                    AppCubit.get(context).changeAppMode();
+                    },
+                ),
+                IconButton(
+                  icon: Icon(Icons.language),
+                  onPressed: () {
+                    AppCubit.get(context).changeLanguage();
+                    cubit.getHome();
+                    cubit.getFavorites();
+                    cubit.getCategories();
+                    cubit.getAccount();
+                    cubit.getCarts();
+                  },
+                ),
 
-            ],
-          ),
-          body: cubit.Screens[cubit.currentIndex],
-          bottomNavigationBar: BottomNavigationBar(
-            onTap: (index) {
-              cubit.changeBottom(index);
-            },
-            currentIndex: cubit.currentIndex,
-            items: [
-              BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.home,
+              ],
+            ),
+            body: cubit.Screens[cubit.currentIndex],
+            bottomNavigationBar: BottomNavigationBar(
+              onTap: (index) {
+                cubit.changeBottom(index);
+              },
+              currentIndex: cubit.currentIndex,
+              items: [
+                BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.home,
+                  ),
+                  label: lang == 'ar' ? 'الرئيسيه' :'Home',
                 ),
-                label: lang == 'ar' ? 'الرئيسيه' :'Home',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.trending_up,
+                BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.trending_up,
+                  ),
+                  label: lang == 'ar' ? 'شائع' :'Trends',
                 ),
-                label: lang == 'ar' ? 'شائع' :'Trends',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.favorite,
+                BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.favorite,
+                  ),
+                  label: lang == 'ar' ? 'المفضله' :'Favorites',
                 ),
-                label: lang == 'ar' ? 'المفضله' :'Favorites',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.add_shopping_cart_outlined,
+                BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.add_shopping_cart_outlined,
+                  ),
+                  label: lang == 'ar' ? 'العربه' :'Cart',
                 ),
-                label: lang == 'ar' ? 'العربه' :'Cart',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.account_circle_outlined,
+                BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.account_circle_outlined,
+                  ),
+                  label: lang == 'ar' ? 'حسابي' :'My Account',
                 ),
-                label: lang == 'ar' ? 'حسابي' :'My Account',
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },
