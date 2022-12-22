@@ -29,11 +29,6 @@ class RegisterScreen extends StatelessWidget {
                       key: 'token', value: state.registerModel.data!.token)
                   .then((value) {
                 token = state.registerModel.data!.token;
-                EcommerceCubit.get(context).getHome();
-                EcommerceCubit.get(context).getCategories();
-                EcommerceCubit.get(context).getFavorites();
-                EcommerceCubit.get(context).getAccount();
-                EcommerceCubit.get(context).getCarts();
                 navigateAndFinish(context, Layout());
               });
             } else {
