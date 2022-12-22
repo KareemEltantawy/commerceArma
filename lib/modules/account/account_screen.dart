@@ -7,12 +7,14 @@ import 'package:ecomerce_app/shared/network/local/cache_helper.dart';
 import 'package:ecomerce_app/shared/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AccountScreen extends StatelessWidget {
   var formKey = GlobalKey<FormState>();
   var nameController = TextEditingController();
   var emailController = TextEditingController();
   var phoneController = TextEditingController();
+  final Uri url = Uri.parse('https://www.freeprivacypolicy.com/live/da48a0e9-25cb-4d0a-8359-a845bd1a9419');
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<EcommerceCubit, EcommerceStates>(
@@ -118,6 +120,13 @@ class AccountScreen extends StatelessWidget {
                               },
                               text:  lang == 'ar' ? 'تسجيل الخروج' :'Log Out',
                               background: defaultColor),
+                          SizedBox(height: 80,),
+                          TextButton(onPressed: (){
+                            launchUrl(url);
+                          }, child: Text('App Privacy and Policy',style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.grey
+                          ),))
                         ],
                       ),
                     ),

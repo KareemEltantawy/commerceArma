@@ -28,11 +28,6 @@ class LoginScreen extends StatelessWidget {
                       key: 'token', value: state.loginModel.data!.token)
                   .then((value) {
                 token = state.loginModel.data!.token;
-                EcommerceCubit.get(context).getHome();
-                EcommerceCubit.get(context).getCategories();
-                EcommerceCubit.get(context).getFavorites();
-                EcommerceCubit.get(context).getAccount();
-                EcommerceCubit.get(context).getCarts();
                 navigateAndFinish(context, Layout());
               });
             } else {
